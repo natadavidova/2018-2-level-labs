@@ -1,0 +1,37 @@
+language: python
+
+python: '3.6'
+
+sudo: required
+
+cache: pip
+
+env:
+  - LABS_TO_BUILD=(1)
+
+install:
+  - pip3 install -r requirements.txt
+
+stages:
+  - test
+  - lint
+  - plagiarism_check
+
+jobs:
+  include:
+    - stage: test
+      script:
+        - for i in ${LABS_TO_BUILD[@]}; do python3 -m unittest discover -p *_test.py -s lab_${i}; done
+    - stage: lint
+      script:
+        - pylint ./**/*.py
+    - stage: plagiarism_check
+      script:
+        - if [ -n "$TRAVIS_COMMIT" ]; then echo yes to commit; fi
+        - if [ -n "$FIPL_ACCESS_TOKEN" ]; then echo yes to token; fi
+        - python3 config/pr_crawler.py
+        - ls -la tmp/lab1_frequences_counter
+        - for i in ${LABS_TO_BUILD[@]}; do python3 config/plagiarism_check.py --source-dir lab_${i}/ --others-dir tmp/lab_${i}; done
+
+notifications:
+  email: true
