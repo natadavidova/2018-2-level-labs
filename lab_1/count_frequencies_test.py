@@ -6,18 +6,7 @@ import unittest
 
 from lab_1 import main
 
-sample_text = "The quick brown fox jumps over the lazy dog"
-stop_words = ('ourselves', 'hers', 'between', 'yourself', 'but', 'again', 'there', 'about', 'once', 'during',
-              'out', 'very', 'having', 'with', 'they', 'own', 'an', 'be', 'some', 'for', 'do', 'its', 'yours',
-              'such', 'into', 'of', 'most', 'itself', 'other', 'off', 'is', 's', 'am', 'or', 'who', 'as',
-              'from', 'him', 'each', 'the', 'themselves', 'until', 'below', 'are', 'we', 'these', 'your',
-              'his', 'through', 'don', 'nor', 'me', 'were', 'her', 'more', 'himself', 'this', 'down', 'should',
-              'our', 'their', 'while', 'above', 'both', 'up', 'to', 'ours', 'had', 'she', 'all', 'no', 'when',
-              'at', 'any', 'before', 'them', 'same', 'and', 'been', 'have', 'in', 'will', 'on', 'does',
-              'yourselves', 'then', 'that', 'because', 'what', 'over', 'why', 'so', 'can', 'did', 'not', 'now',
-              'under', 'he', 'you', 'herself', 'has', 'just', 'where', 'too', 'only', 'myself', 'which',
-              'those', 'i', 'after', 'few', 'whom', 't', 'being', 'if', 'theirs', 'my', 'against', 'a', 'by',
-              'doing', 'it', 'how', 'further', 'was', 'here', 'than')
+SAMPLE_TEXT = "The quick brown fox jumps over the lazy dog"
 
 
 class CountFrequenciesTest(unittest.TestCase):
@@ -41,7 +30,7 @@ class CountFrequenciesTest(unittest.TestCase):
             'dog': 1
         }
 
-        res = main.calculate_frequences(sample_text)
+        res = main.calculate_frequences(SAMPLE_TEXT)
         self.assertEqual(expected_result, res)
 
     def test_calculate_frequences_digits(self):
@@ -179,7 +168,6 @@ class CountFrequenciesTest(unittest.TestCase):
         res = main.calculate_frequences(sample_text)
         self.assertEqual(expected_result, res)
 
-
     # def test_calculate_frequences_no_spaces(self):
     #     """
     #     Text is dirty
@@ -188,5 +176,3 @@ class CountFrequenciesTest(unittest.TestCase):
     #     expected_result = {}
     #     res = main.calculate_frequences(sample_text)
     #     self.assertEqual(expected_result, res)
-
-
