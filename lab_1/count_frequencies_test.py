@@ -1,3 +1,4 @@
+# pylint: skip-file
 """
 Checks the first lab. Part about the creation of the frequencies dictionary
 """
