@@ -11,7 +11,7 @@ python -m unittest discover -p "*_test.py" -s .
 
 1. Создаем `upstream` таргет в репозитории:
 ```
-git remote add upstream https://github.com/fipl-hse/word-frequency-counter-tests
+git remote add upstream https://github.com/fipl-hse/2018-2-level-labs
 git fetch upstream
 git merge upstream/master
 ```
