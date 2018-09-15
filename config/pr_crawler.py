@@ -37,7 +37,7 @@ def main():
     current_commit_hash = os.environ['TRAVIS_COMMIT']
 
     token = ''
-    base_url = 'https://api.github.com/repos/fipl-hse/word-frequency-counter-tests'
+    base_url = 'https://api.github.com/repos/fipl-hse/2018-2-level-labs'
 
     content = get_by_url(url='{}/pulls{}?state=all'.format(base_url, token))
     for pull_req in content:
