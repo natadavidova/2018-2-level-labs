@@ -18,7 +18,7 @@ jobs:
   include:
     - stage: test
       script:
-        - ./config/run-tests.sh
+        - . ./config/run-tests.sh
     - stage: lint
       script:
         - pylint ./**/*.py

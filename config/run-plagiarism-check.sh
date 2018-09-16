@@ -1,7 +1,10 @@
 echo running check
-echo "${LABS_TO_BUILD[*]}"
 WAS_FAILED=false
-for i in ${LABS_TO_BUILD[@]}; do
+LABS=`cat config/labs.txt`
+echo "$LABS"
+
+for i in $LABS; do
+	echo "$i"
 	if ! python3 config/plagiarism_check.py --source-dir lab_${i}/ --others-dir tmp/lab_${i};  then
     	WAS_FAILED=true
 	fi
