@@ -1,7 +1,8 @@
 echo running tests
-echo "${LABS_TO_BUILD[*]}"
 WAS_FAILED=false
-for i in ${LABS_TO_BUILD[@]}; do
+echo "$1"
+for i in $1; do
+	echo "$i"
 	if ! python3 -m unittest discover -p *_test.py -s lab_${i};  then
     	WAS_FAILED=true
 	fi

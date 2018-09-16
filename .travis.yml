@@ -9,6 +9,7 @@ cache: pip
 env:
   global:
     - LABS_TO_BUILD=(1)
+    - ME=1
 
 install:
   - pip3 install -r requirements.txt
@@ -23,7 +24,8 @@ jobs:
     - stage: test
       script:
         - echo "${LABS_TO_BUILD[*]}"
-        - . ./config/run-tests.sh
+        - echo $ME
+        - . ./config/run-tests.sh "${LABS_TO_BUILD[*]}
     - stage: lint
       script:
         - pylint ./**/*.py
