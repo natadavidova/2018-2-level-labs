@@ -49,7 +49,8 @@ def main():
             file_name = '/'.join(target_url.split('/')[-2:])
             source_hash = target_url.split('/')[-3]
 
-            if source_hash == current_commit_hash:
+            if source_hash == current_commit_hash or file_name.endswith('_test.py'):
+                print('Ignoring file: {}'.format(file_name))
                 continue
             to_url = os.path.join('tmp',
                           '{}_{}.{}'.format(file_name.split('.')[0],

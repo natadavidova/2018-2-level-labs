@@ -29,9 +29,10 @@ def get_python_files_from(path):
     files_paths = []
     for root, _, files in os.walk(path):
         path = root.split(os.sep)
-        for file in files:
-            if file.endswith('.py') and file != '__init__.py' and not file.endswith('_test.py'):
-                files_paths.append(os.path.join(root, file))
+        for f_name in files:
+            if f_name.endswith('.py') and f_name != '__init__.py' and not '_test' in f_name:
+                print(f_name)
+                files_paths.append(os.path.join(root, f_name))
     return files_paths
 
 
