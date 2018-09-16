@@ -1,4 +1,5 @@
-echo "$LABS_TO_BUILD"
+echo running check
+echo "${LABS_TO_BUILD[*]}"
 WAS_FAILED=false
 for i in ${LABS_TO_BUILD[@]}; do
 	if ! python3 config/plagiarism_check.py --source-dir lab_${i}/ --others-dir tmp/lab_${i};  then
