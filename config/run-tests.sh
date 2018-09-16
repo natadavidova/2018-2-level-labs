@@ -8,5 +8,5 @@ done
 
 if [ "$WAS_FAILED" = true ]; then
 	echo tests failed
-	return 1
+	exit 1
 fi
