@@ -25,7 +25,7 @@ jobs:
       script:
         - echo "${LABS_TO_BUILD[*]}"
         - echo $ME
-        - . ./config/run-tests.sh "${LABS_TO_BUILD[*]}
+        - . ./config/run-tests.sh "${LABS_TO_BUILD[*]}"
     - stage: lint
       script:
         - pylint ./**/*.py
