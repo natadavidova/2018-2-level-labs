@@ -21,7 +21,7 @@ jobs:
   include:
     - stage: test
       script:
-        - for i in ${LABS_TO_BUILD[@]}; do python3 -m unittest discover -p *_test.py -s lab_${i}; done
+        - ./config/run-tests.sh
     - stage: lint
       script:
         - pylint ./**/*.py
@@ -30,7 +30,7 @@ jobs:
         - if [ -n "$TRAVIS_COMMIT" ]; then echo yes to commit; fi
         - if [ -n "$FIPL_ACCESS_TOKEN" ]; then echo yes to token; fi
         - python3 config/pr_crawler.py
-        - for i in ${LABS_TO_BUILD[@]}; do python3 config/plagiarism_check.py --source-dir lab_${i}/ --others-dir tmp/lab_${i}; done
+        - ./config/run-plagiarism-check.sh
 
 notifications:
   email: true
