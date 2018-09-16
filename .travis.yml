@@ -21,7 +21,7 @@ jobs:
   include:
     - stage: test
       script:
-        - ./config/run-tests.sh
+        - . ./config/run-tests.sh
     - stage: lint
       script:
         - pylint ./**/*.py
@@ -30,7 +30,7 @@ jobs:
         - if [ -n "$TRAVIS_COMMIT" ]; then echo yes to commit; fi
         - if [ -n "$FIPL_ACCESS_TOKEN" ]; then echo yes to token; fi
         - python3 config/pr_crawler.py
-        - ./config/run-plagiarism-check.sh
+        - . ./config/run-plagiarism-check.sh
 
 notifications:
   email: true

@@ -8,5 +8,5 @@ done
 
 if [ "$WAS_FAILED" = true ]; then
 	echo plagiarism failed
-	exit 1
+	return 1
 fi
