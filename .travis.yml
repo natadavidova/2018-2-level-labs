@@ -7,7 +7,8 @@ sudo: required
 cache: pip
 
 env:
-  - LABS_TO_BUILD=(1)
+  global:
+    - LABS_TO_BUILD=(1)
 
 install:
   - pip3 install -r requirements.txt
@@ -21,6 +22,7 @@ jobs:
   include:
     - stage: test
       script:
+        - echo "${LABS_TO_BUILD[*]}"
         - . ./config/run-tests.sh
     - stage: lint
       script:
@@ -29,7 +31,6 @@ jobs:
       script:
         - if [ -n "$TRAVIS_COMMIT" ]; then echo yes to commit; fi
         - if [ -n "$FIPL_ACCESS_TOKEN" ]; then echo yes to token; fi
-        - echo "${LABS_TO_BUILD[*]}"
         - python3 config/pr_crawler.py
         - . ./config/run-plagiarism-check.sh
 
