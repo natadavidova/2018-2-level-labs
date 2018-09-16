@@ -1,7 +1,9 @@
 echo running tests
 WAS_FAILED=false
-echo "$1"
-for i in $1; do
+LABS=`cat config/labs.txt`
+echo "$LABS"
+
+for i in $LABS; do
 	echo "$i"
 	if ! python3 -m unittest discover -p *_test.py -s lab_${i};  then
     	WAS_FAILED=true
