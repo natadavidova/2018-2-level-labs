@@ -169,11 +169,3 @@ class CountFrequenciesTest(unittest.TestCase):
         res = main.calculate_frequences(sample_text)
         self.assertEqual(expected_result, res)
 
-    # def test_calculate_frequences_no_spaces(self):
-    #     """
-    #     Text is dirty
-    # 	"""
-    #     sample_text = """one*two,threee^four"""
-    #     expected_result = {}
-    #     res = main.calculate_frequences(sample_text)
-    #     self.assertEqual(expected_result, res)
