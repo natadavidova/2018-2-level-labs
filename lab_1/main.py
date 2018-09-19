@@ -40,8 +40,6 @@ def calculate_frequences(text: str) -> dict:
     #  print(key, first_dict[key])
     return first_dict
 
-first_dict = calculate_frequences(text)
-
 
 def filter_stop_words(first_dict: dict, stop_words: list) -> dict:
     second_dict = first_dict.copy()
