@@ -5,20 +5,72 @@ Count frequencies dictionary by the given arbitrary text
 """
 
 
-def calculate_frequences() -> dict:
-    """
-    Calculates number of times each word appears in the text
-    """
-    return {"cat": 4}
+def calculate_frequences(text: str) -> dict:
 
-def filter_stop_words() -> dict:
-    """
-    Removes all stop words from the given frequencies dictionary
-    """
-    pass
+    freq_dict = {}
 
-def get_top_n() -> tuple:
-    """
-    Takes first N popular words
-    """
-    pass
+    if not text:
+        return freq_dict
+
+    elif type(text) == str:
+
+        words = text.lower().split(" ")
+
+        if '' in words:
+            while '' in words:
+                words.remove('')
+
+        if '\n' in words:
+            while '\n' in words:
+                words.remove('\n')
+
+
+        words_new = []
+
+        for index, word in enumerate(words):
+            new_word = ""
+            if not word.isalpha():
+
+                for i in word:
+                    if i.isalpha():
+                        new_word += i
+
+                if new_word:
+                    words_new.append(new_word)
+
+            else:
+                words_new.append(word)
+
+        for word in words_new:
+            count_word = words_new.count(word)
+            freq_dict[word] = count_word
+
+    return freq_dict
+
+def filter_stop_words(freq_dict: dict, stop_words: tuple) -> dict:
+
+    if not freq_dict:
+        return freq_dict
+
+    freq_dict_new = freq_dict.copy()
+
+    for key in freq_dict.keys():
+        if type(key) != str:
+            freq_dict_new.pop(key)
+    if stop_words:
+        for word_stop in stop_words:
+            if word_stop in freq_dict_new:
+                freq_dict_new.pop(word_stop)
+
+    return freq_dict_new
+
+
+def get_top_n(freq_dict: dict, top_n: int) -> tuple:
+
+    if not top_n > 0:
+        return ()
+
+    top_n_dict = sorted(freq_dict, key=freq_dict.__getitem__, reverse=True)[:top_n]
+    return tuple(top_n_dict)
+
+
