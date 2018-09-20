@@ -66,8 +66,7 @@ def filter_stop_words(first_dict: dict, stop_words: list) -> dict:
     return second_dict
 
 
-
-def get_top_n() -> tuple:
+def get_top_n(second_dict: dict, n: int) -> tuple:
     """
     Takes first N popular words
     """
