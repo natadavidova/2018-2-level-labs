@@ -13,31 +13,23 @@ def calculate_frequences(text: str) -> dict:
         return freq_dict
 
     elif type(text) == str:
-
         words = text.lower().split(" ")
-
         if '' in words:
             while '' in words:
                 words.remove('')
-
         if '\n' in words:
             while '\n' in words:
                 words.remove('\n')
-
-
         words_new = []
 
         for index, word in enumerate(words):
             new_word = ""
             if not word.isalpha():
-
                 for i in word:
                     if i.isalpha():
                         new_word += i
-
                 if new_word:
                     words_new.append(new_word)
-
             else:
                 words_new.append(word)
 
@@ -46,6 +38,7 @@ def calculate_frequences(text: str) -> dict:
             freq_dict[word] = count_word
 
     return freq_dict
+
 
 def filter_stop_words(freq_dict: dict, stop_words: tuple) -> dict:
 
@@ -70,7 +63,5 @@ def get_top_n(freq_dict: dict, top_n: int) -> tuple:
     if not top_n > 0:
         return ()
 
-    top_n_dict = sorted(freq_dict, key=freq_dict.__getitem__, reverse=True)[:top_n]
-    return tuple(top_n_dict)
-
-
+    top_n_dict = sorted(freq_dict, key=freq_dict.__getitem__, reverse=True)
+    return tuple(top_n_dict[:top_n])
