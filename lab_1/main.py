@@ -12,17 +12,16 @@ def calculate_frequences(text: str) -> dict:
     if not text:
         return freq_dict
 
-    elif type(text) == str:
+    if isinstance(text, str):
         words = text.lower().split(" ")
-        if '' in words:
+        if '' in words or '\n' in words:
             while '' in words:
                 words.remove('')
-        if '\n' in words:
             while '\n' in words:
                 words.remove('\n')
         words_new = []
 
-        for index, word in enumerate(words):
+        for word in words:
             new_word = ""
             if not word.isalpha():
                 for i in word:
@@ -48,7 +47,7 @@ def filter_stop_words(freq_dict: dict, stop_words: tuple) -> dict:
     freq_dict_new = freq_dict.copy()
 
     for key in freq_dict.keys():
-        if type(key) != str:
+        if not isinstance(key, str):
             freq_dict_new.pop(key)
     if stop_words:
         for word_stop in stop_words:
