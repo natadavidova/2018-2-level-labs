@@ -7,9 +7,10 @@ Count frequencies dictionary by the given arbitrary text
 
 def calculate_frequences(text: str) -> dict:
     first_dict = {}
-    list_of_marks = ['.', ',', ':', '"', '`', '[', ']', '?', '!', '@', '*', '(', ')', '-',
+    list_of_marks = ['.', ',', ':', '"', '`', '[', ']', '?', '!', '@', '&', '$', '^', '*', '(', ')', '-',
                      '_', '“', '”', '’', '#', '%', '<', '>', '*', '~',
-                     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+                     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', "'"
+                     ]
     try:
         elements = text.split()
     except:
@@ -24,6 +25,8 @@ def calculate_frequences(text: str) -> dict:
             thing = thing.strip(mark)
         thing = thing.lower()
         first_dict[thing] = first_dict.get(thing, 0) + 1  ### Первый ШАГ
+    if '' in first_dict.keys():
+        first_dict.pop('')
     # for key in first_dict:
     #   print(key, first_dict[key])
     # fictional_stop_words = []
@@ -42,7 +45,18 @@ def calculate_frequences(text: str) -> dict:
 
 
 def filter_stop_words(first_dict: dict, stop_words: list) -> dict:
-    second_dict = first_dict.copy()
+    list_of_marks = ['.', ',', ':', '"', '`', '[', ']', '?', '!', '@', '&', '$', '^', '*', '(', ')', '-',
+                     '_', '“', '”', '’', '#', '%', '<', '>', '*', '~',
+                     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', "'"
+                     ]
+    second_dict = {}
+    try:
+        second_dict = first_dict.copy()
+    except:
+        second_dict = {}
+    ### Если key присваивается пользователем, key is int
+    if first_dict is None or stop_words is None:
+        return second_dict
     for stop_word in stop_words:
         if stop_word in second_dict.keys():
             second_dict.pop(stop_word)
