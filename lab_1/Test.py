@@ -13,7 +13,7 @@ def calculate_frequences(text: str) -> dict:
                     '$', '^', '*', '(', ')',
                     '_', '“', '”', '’', '#', '%', '<', '>', '*', '~',
                     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-                     ]
+                    ]
     try:
         elements = text.split()
     except AttributeError:
