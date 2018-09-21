@@ -53,8 +53,23 @@ def filter_stop_words(first_dict: dict, stop_words: list) -> dict:
     return third_dict
 
 
-def get_top_n(second_dict: dict, n: int) -> tuple:
+def get_top_n(third_dict: dict, n: int) -> tuple:
     """
     Takes first N popular words
     """
-    pass
+    list_of_lists = []
+    list_of_top_words = []
+    count = 0
+    if n < 0:
+        return ()
+    for k, v in third_dict.items():
+        list_of_lists.append([v, k])
+    sorted(list_of_lists)
+    for item in list_of_lists:
+        if count == n:
+            break
+        list_of_top_words.append(item[1])
+        count += 1
+    return tuple(list_of_top_words)
+
+
