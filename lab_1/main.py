@@ -33,11 +33,22 @@ def calculate_frequences(text: str) -> dict:
     return dictionary_freq
 
 
-def filter_stop_words() -> dict:
+def filter_stop_words(frequencies: dict, stop_words: tuple) -> dict:
     """
     Removes all stop words from the given frequencies dictionary
     """
-    pass
+    # Шаг 0. Уберем возможность неверного ввода данных.
+    if stop_words is None or frequencies is None:
+        return frequencies
+
+    # Шаг 1. Пройдемся по словарю и исключим ненужные слова.
+    for key in list(frequencies):
+        if str(key).isdigit() or key in stop_words:
+            frequencies.pop(key)
+            continue
+
+    # Шаг 2. Возвращаем отфильтрованный словарь.
+    return frequencies
 
 def get_top_n() -> tuple:
     """
