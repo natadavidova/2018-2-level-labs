@@ -37,7 +37,7 @@ def filter_stop_words(frequencies: dict, stop_words: tuple) -> dict:
     """
     Removes all stop words from the given frequencies dictionary
     """
-    # Шаг 0. Уберем возможность неверного ввода данных.
+    # Шаг 0. Уберем возможность неверного ввода.
     if stop_words is None or frequencies is None:
         return frequencies
 
