@@ -29,7 +29,7 @@ def calculate_frequences(text: str) -> dict:
         dictionary_freq[word] = frequency
         continue
 
-    # Шаг 4. Возвращаем полученный, отсортированный словарь частотности.
+    # Шаг 4. Возвращаем полученный, отсортированный словарь частот.
     return dictionary_freq
 
 
