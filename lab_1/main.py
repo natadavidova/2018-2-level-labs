@@ -1,10 +1,3 @@
-"""
-Labour work #1
-
-Count frequencies dictionary by the given arbitrary text
-"""
-
-
 def calculate_frequences(text: str) -> dict:
     first_dict = {}
     list_of_marks = [
@@ -44,32 +37,27 @@ def filter_stop_words(first_dict: dict, stop_words: list) -> dict:
     for stop_word in stop_words:
         if stop_word in second_dict.keys():
             second_dict.pop(stop_word)
-    for k in second_dict.keys():
+    for key in second_dict.keys():
         try:
-            if 0 <= k < 0:
+            if 0 <= key < 0:
                 continue
         except TypeError:
-            third_dict[k] = first_dict[k]
+            third_dict[key] = first_dict[key]
     return third_dict
 
 
-def get_top_n(third_dict: dict, n: int) -> tuple:
-    """
-    Takes first N popular words
-    """
+def get_top_n(third_dict: dict, top_n: int) -> tuple:
     list_of_lists = []
     list_of_top_words = []
     count = 0
-    if n < 0:
+    if top_n < 0:
         return ()
-    for k, v in third_dict.items():
-        list_of_lists.append([v, k])
+    for key, value in third_dict.items():
+        list_of_lists.append([value, key])
     sorted(list_of_lists)
     for item in list_of_lists:
-        if count == n:
+        if count == top_n:
             break
         list_of_top_words.append(item[1])
         count += 1
     return tuple(list_of_top_words)
-
-
