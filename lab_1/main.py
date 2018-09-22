@@ -5,6 +5,20 @@ Count frequencies dictionary by the given arbitrary text
 """
 
 
+def read_from_file(path_to_file: str, lines_limit: int) -> str:
+
+    text = ""
+
+    with open(path_to_file, encoding='utf-8') as f:
+        for index, line in enumerate(f):
+            if index < lines_limit:
+                text += line
+            else:
+                break
+
+    return text
+
+
 def calculate_frequences(text: str) -> dict:
 
     freq_dict = {}
@@ -64,3 +78,12 @@ def get_top_n(freq_dict: dict, top_n: int) -> tuple:
 
     top_n_dict = sorted(freq_dict, key=freq_dict.__getitem__, reverse=True)
     return tuple(top_n_dict[:top_n])
+
+
+def write_to_file(path_to_file: str, content: tuple):
+
+    with open(path_to_file, "w", encoding='utf-8') as f:
+
+        for word in content:
+            word += '\n'
+            f.write(word)
