@@ -9,8 +9,8 @@ def read_from_file(path_to_file: str, lines_limit: int) -> str:
 
     text = ""
 
-    with open(path_to_file, encoding='utf-8') as file_text:
-        for index, line in enumerate(file_text):
+    with open(path_to_file, encoding='utf-8') as f_text:
+        for index, line in enumerate(f_text):
             if index < lines_limit:
                 text += line
             else:
@@ -82,8 +82,8 @@ def get_top_n(freq_dict: dict, top_n: int) -> tuple:
 
 def write_to_file(path_to_file: str, content: tuple):
 
-    with open(path_to_file, "w", encoding='utf-8') as f:
+    with open(path_to_file, "w", encoding='utf-8') as f_text:
 
         for word in content:
             word += '\n'
-            f.write(word)
+            f_text.write(word)
