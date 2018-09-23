@@ -50,8 +50,25 @@ def filter_stop_words(frequencies: dict, stop_words: tuple) -> dict:
     # Шаг 2. Возвращаем отфильтрованный словарь.
     return frequencies
 
-def get_top_n() -> tuple:
+
+def get_top_n(frequencies: dict, top_n: int) -> tuple:
     """
     Takes first N popular words
     """
-    pass
+    # Шаг 0. Уберем возможность неверного ввода.
+    if top_n < 0:
+        return ()
+
+    # Шаг 1. Пройдемся по словарю н-раз.
+    string = []
+    counter = 0
+    for key in frequencies.keys():
+        if counter == top_n:
+            break
+        else:
+            string.append(key)
+            counter += 1
+    result = tuple(string)
+
+    # Шаг 4. Вернем результат.
+    return result
