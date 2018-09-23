@@ -5,70 +5,70 @@ Count frequencies dictionary by the given arbitrary text
 """
 
 
-def calculate_frequences(text: str) -> dict:
+def calculate_frequences(text_first: str) -> dict:
     """
     Calculates number of times each word appears in the text
     """
     # Шаг 0. Уберем возможность неверного ввода.
-    if text is None or str(text).isdigit():
+    if text_first is None or str(text_first).isdigit():
         dictionary_freq = {}
         return dictionary_freq
 
     # Шаг 1. Пройдемся по тексту и уберем лишние символы.
-    for element in text:
-        if element in """1234567890_-=!@#$%^&*()~_+[]{}:;'",./><?""":
-            text = text.replace(element, ' ')
+    for element_word in text_first:
+        if element_word in """1234567890_-=!@#$%^&*()~_+[]{}:;'",./><?""":
+            text_first = text_first.replace(element_word, ' ')
             continue
-    text = text.lower()
-    text = text.split()
+    text_first = text_first.lower()
+    text_first = text_first.split()
 
     # Шаг 2. Создадим словарь частотности.
     dictionary_freq = {}
-    for word in text:
-        frequency = text.count(word)
-        dictionary_freq[word] = frequency
+    for word_first in text_first:
+        frequency_word = text_first.count(word_first)
+        dictionary_freq[word_first] = frequency_word
         continue
 
     # Шаг 4. Возвращаем полученный, отсортированный словарь частот.
     return dictionary_freq
 
 
-def filter_stop_words(frequencies: dict, stop_words: tuple) -> dict:
+def filter_stop_words(frequencies_dictionary: dict, stop_words_list: tuple) -> dict:
     """
     Removes all stop words from the given frequencies dictionary
     """
     # Шаг 0. Уберем возможность неверного ввода.
-    if stop_words is None or frequencies is None:
-        return frequencies
+    if stop_words_list is None or frequencies_dictionary is None:
+        return frequencies_dictionary
 
     # Шаг 1. Пройдемся по словарю и исключим ненужные слова.
-    for key in list(frequencies):
-        if str(key).isdigit() or key in stop_words:
-            frequencies.pop(key)
+    for key in list(frequencies_dictionary):
+        if str(key).isdigit() or key in stop_words_list:
+            frequencies_dictionary.pop(key)
             continue
 
     # Шаг 2. Возвращаем отфильтрованный словарь.
-    return frequencies
+    return frequencies_dictionary
 
 
-def get_top_n(frequencies: dict, top_n: int) -> tuple:
+def get_top_n(frequencies_last: dict, top_n_first: int) -> tuple:
     """
     Takes first N popular words
     """
     # Шаг 0. Уберем возможность неверного ввода.
-    if top_n < 0:
+    if top_n_first < 0:
         return ()
 
     # Шаг 1. Пройдемся по словарю н-раз.
     string = []
-    counter = 0
-    for key in frequencies.keys():
-        if counter == top_n:
+    counter_check = 0
+    for key in frequencies_last.keys():
+        if counter_check == top_n_first:
             break
         else:
             string.append(key)
-            counter += 1
-    result = tuple(string)
+            counter_check += 1
+    result_final = tuple(string)
 
     # Шаг 4. Вернем результат.
-    return result
+    return result_final
