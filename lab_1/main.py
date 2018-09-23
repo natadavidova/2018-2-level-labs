@@ -72,3 +72,41 @@ def get_top_n(frequencies_last: dict, top_n_first: int) -> tuple:
 
     # Шаг 4. Вернем результат.
     return result_final
+
+
+def read_from_file(path_to_file: str, lines_limit: int) -> str:
+    # data.txt
+
+    # Шаг 1. Прочитаем файл.
+    text = open(path_to_file, 'r')
+    text = text.read()
+
+    # Шаг 2. Пройдемся по строчкам файла и запишем нужное количество строк в новую строку.
+    text_new = ''
+    counter = 0
+    for line in text:
+        if counter == lines_limit:
+            break
+        else:
+            text_new += line + '\n'
+            counter += 1
+            continue
+
+    # Шаг 3. Возвращаем записанную из файла строку.
+    return text_new
+
+
+def write_to_file(path_to_file: str, content: tuple):
+    # report.txt
+
+    # Шаг 1. Откроем файл для записи.
+    file_new = open(path_to_file, 'w')
+
+    # Шаг 2. Пройдемся по элементам кортежа и запишем их в файл. Каждое слово с новой строки.
+    for element in content:
+        file_new.write(element + '\n')
+        continue
+
+    # Шаг 3. Закроем файл.
+    file_new.close()
+    return True
