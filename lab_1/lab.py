@@ -5,6 +5,19 @@ Count frequencies dictionary by the given arbitrary text
 """
 
 
+def read_from_file(path_to_file, lines_limit: int) -> str:
+    my_text = ''
+    count_lines = 0
+    my_file = open(path_to_file, 'r')
+    for line in my_file.read():
+        if count_lines == lines_limit:
+            return my_text
+        my_text += line
+        count_lines += 1
+    my_file.close()
+    return my_text
+
+
 def calculate_frequences(text: str) -> dict:
     first_dict = {}
     list_of_marks = [
@@ -61,10 +74,17 @@ def get_top_n(third_dict: dict, top_n: int) -> tuple:
         return ()
     for key, value in third_dict.items():
         list_of_lists.append([value, key])
-    sorted(list_of_lists)
+    list_of_lists.sort(reverse=True)
     for item in list_of_lists:
         if count == top_n:
             break
         list_of_top_words.append(item[1])
         count += 1
     return tuple(list_of_top_words)
+
+
+def write_to_file(path_to_file: str, content: tuple):
+    my_file = open(path_to_file, 'w')
+    for word in content:
+        my_file.write(word + '\n')
+    my_file.close()
