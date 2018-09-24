@@ -67,15 +67,15 @@ def filter_stop_words(first_dict: dict, stop_words: list) -> dict:
 
 
 def get_top_n(third_dict: dict, top_n: int) -> tuple:
-    list_of_lists = []
+    list_of_value_key = []
     list_of_top_words = []
     count = 0
     if top_n < 0:
         return ()
     for key, value in third_dict.items():
-        list_of_lists.append([value, key])
-    list_of_lists.sort(reverse=True)
-    for item in list_of_lists:
+        list_of_value_key.append([value, key])
+    list_of_value_key.sort(reverse=True)
+    for item in list_of_value_key:
         if count == top_n:
             break
         list_of_top_words.append(item[1])
