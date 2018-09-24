@@ -59,16 +59,24 @@ def get_top_n(frequencies_last: dict, top_n_first: int) -> tuple:
     if top_n_first < 0:
         return ()
 
-    # Шаг 1. Пройдемся по словарю н-раз.
-    string = []
-    counter_check = 0
-    for key in frequencies_last.keys():
-        if counter_check == top_n_first:
+    # Шаг 1. Пройдемся по словарю н-раз. Запишем в список пару значение-ключ.
+    check_list = []
+    for key, value in frequencies_last.items():
+        check_list.append([value, key])
+        continue
+
+    # Шаг 1.1. Отсортируем список с правильным порядком. От большей частоты к меньшей.
+    sorted(check_list, reverse=True)
+
+    # Шаг 2. Запишем н-слов с наибольшей частотой.
+    final_res = []
+    counter_check = top_n_first
+    for element in check_list:
+        if counter_check == 0:
             break
-        else:
-            string.append(key)
-            counter_check += 1
-    result_final = tuple(string)
+        final_res.append(element[1])
+        counter_check -= 1
+    result_final = tuple(final_res)
 
     # Шаг 4. Вернем результат.
     return result_final
