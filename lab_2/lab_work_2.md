@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
 Импорт уже сделан, обратите внимание на начало файла `main.py`:
 ```python
-from lab_2.main import calculate_frequences
+from lab_1.main import calculate_frequences
 ```
 
 Остается корректно вызвать эту функцию с правильными аргументами.
