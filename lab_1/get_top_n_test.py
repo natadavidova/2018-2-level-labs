@@ -5,7 +5,7 @@ Checks the first lab. Part about the getting n popular words
 
 import unittest
 
-from lab_1 import main
+from lab_1 import lab
 
 
 class GetTopNTest(unittest.TestCase):
@@ -27,7 +27,7 @@ class GetTopNTest(unittest.TestCase):
             'dog': 1
         }
         expected_result = ('quick', 'brown', 'fox')
-        top_words = main.get_top_n(filtered_dict, 3)
+        top_words = lab.get_top_n(filtered_dict, 3)
         self.assertEqual(expected_result, top_words)
 
     def test_get_top_n_equals_length(self):
@@ -44,7 +44,7 @@ class GetTopNTest(unittest.TestCase):
             'dog': 1
         }
         expected_result = ('quick', 'brown', 'fox', 'jumps', 'lazy', 'dog')
-        top_words = main.get_top_n(filtered_dict, 6)
+        top_words = lab.get_top_n(filtered_dict, 6)
         self.assertEqual(expected_result, top_words)
 
     def test_get_top_n_empty(self):
@@ -53,7 +53,7 @@ class GetTopNTest(unittest.TestCase):
         """
         expected_result = ()
         filtered_dict = {}
-        top_words = main.get_top_n(filtered_dict, 3)
+        top_words = lab.get_top_n(filtered_dict, 3)
         self.assertEqual(expected_result, top_words)
 
     def test_get_top_n_overflow(self):
@@ -62,7 +62,7 @@ class GetTopNTest(unittest.TestCase):
         """
         expected_result = ('fox',)
         filtered_dict = {'fox': 1}
-        top_words = main.get_top_n(filtered_dict, 3)
+        top_words = lab.get_top_n(filtered_dict, 3)
         self.assertEqual(expected_result, top_words)
 
     def test_get_top_n_equal_frequency(self):
@@ -71,7 +71,7 @@ class GetTopNTest(unittest.TestCase):
         """
         expected_result = ('fox', 'dog', 'cat')
         filtered_dict = {'fox': 1, 'dog': 1, 'cat': 1,}
-        top_words = main.get_top_n(filtered_dict, 3)
+        top_words = lab.get_top_n(filtered_dict, 3)
         self.assertEqual(expected_result, top_words)
 
     def test_get_top_n_equal_order(self):
@@ -80,7 +80,7 @@ class GetTopNTest(unittest.TestCase):
         """
         expected_result = ('dog', 'fox', 'cat')
         filtered_dict = {'fox': 1, 'dog': 1, 'cat': 1,}
-        top_words = main.get_top_n(filtered_dict, 3)
+        top_words = lab.get_top_n(filtered_dict, 3)
         self.assertCountEqual(expected_result, top_words)
 
     def test_get_top_n_below_zero(self):
@@ -89,7 +89,7 @@ class GetTopNTest(unittest.TestCase):
         """
         expected_result = ()
         filtered_dict = {'fox': 1, 'dog': 1, 'cat': 1}
-        top_words = main.get_top_n(filtered_dict, -1)
+        top_words = lab.get_top_n(filtered_dict, -1)
         self.assertEqual(expected_result, top_words)
 
     def test_get_top_n_zero(self):
@@ -98,5 +98,5 @@ class GetTopNTest(unittest.TestCase):
         """
         expected_result = ()
         filtered_dict = {'fox': 1, 'dog': 1, 'cat': 1}
-        top_words = main.get_top_n(filtered_dict, 0)
+        top_words = lab.get_top_n(filtered_dict, 0)
         self.assertEqual(expected_result, top_words)
