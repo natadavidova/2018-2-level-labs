@@ -44,14 +44,14 @@ def compare_file_to_others(ref_file, candidate_files):
     for name in files:
         try:
             content = read_file_content(name)
-            root_node = ast.parse(content)
+            _ = ast.parse(content)
             payload.append(content)
         except SyntaxError:
             pass
 
     res = pycode_similar.detect(payload, diff_method=pycode_similar.UnifiedDiff)
     per_function_reports = res[0][1]
-    if len(per_function_reports) == 0:
+    if not per_function_reports:
         return 0
     total = 0
     for i in per_function_reports:
