@@ -73,7 +73,7 @@ from lab_1.main import calculate_frequences
 
 Интерфейс: 
 ```py
-def propose_candidates(word: str, max_depth_permutations: int=1) -> str:
+def propose_candidates(word: str, max_depth_permutations: int=1) -> list:
   pass
 ```
 
