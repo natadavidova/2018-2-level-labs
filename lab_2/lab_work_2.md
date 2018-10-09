@@ -91,7 +91,7 @@ def propose_candidates(word: str, max_depth_permutations: int=1) -> list:
 
 Интерфейс: 
 ```py
-def keep_known(candidates: tuple, as_is_words: tuple) -> list:
+def keep_known(candidates: tuple, as_is_words: tuple, frequencies: dict) -> list:
   pass
 ```
 
