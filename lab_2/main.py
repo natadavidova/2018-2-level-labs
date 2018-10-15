@@ -2,7 +2,7 @@
 Labour work #2
  Check spelling of words in the given  text
 """
-from lab_1.main import get_top_n
+# from lab_1.main import get_top_n
 
 LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -97,10 +97,9 @@ def propose_candidates(word: str, max_depths_permutations: int = 1) -> list:
     return candidates_result
 
 
-def keep_known(candidates: tuple, as_is_words: tuple, frequencies: dict) -> list:
-    # Step 0. Test processing.
-    if as_is_words is None:
-        return []
+def keep_known(candidates: tuple, frequencies: dict) -> list:
+    # as_is_word = tuple
+    # if as_is_words is None: #return []
     if candidates is None:
         return []
     if type(candidates) is not tuple:
@@ -111,10 +110,8 @@ def keep_known(candidates: tuple, as_is_words: tuple, frequencies: dict) -> list
     # Step 1. Compliance check for candidates.
     list_of_true_candidates = []
     for potential_true_candidate in candidates:
-        if str(potential_true_candidate).isdigit():
-            continue
-        if potential_true_candidate.upper() in as_is_words:
-            list_of_true_candidates.append(potential_true_candidate)
+        if str(potential_true_candidate).isdigit():   # if potential_true_candidate.upper() in as_is_words:
+            continue                                 # list_of_true_candidates.append(potential_true_candidate)
         if potential_true_candidate in frequencies:
             list_of_true_candidates.append(potential_true_candidate)
 
@@ -135,21 +132,34 @@ def choose_best(frequencies: dict, candidates: tuple) -> str:
             continue
         new_candidates.append(potential_candidate)
 
+    # Step 0.1 Coping with noisy second test.
     new_dict = {}
     for new_candidate in new_candidates:
         new_dict[new_candidate] = frequencies[new_candidate]
+    new_dict_plus = dict(new_dict)
+    for new_candidate in range(0, len(new_candidates)-1):
+        if new_dict[new_candidates[new_candidate]] > new_dict[new_candidates[new_candidate+1]]:
+            new_dict_plus.pop(new_candidates[new_candidate+1])
+        if new_dict[new_candidates[new_candidate]] < new_dict[new_candidates[new_candidate+1]]:
+            new_dict_plus.pop(new_candidates[new_candidate])
+        if new_dict[new_candidates[new_candidate]] == new_dict[new_candidates[new_candidate+1]]:
+            continue
 
+    final_ones = []
+    for key in new_dict_plus.keys():
+        final_ones.append(key)
+    final_ones.sort()
     # Step 2. Using function from lab1 to get the most popular candidate.
-    final_candidate = get_top_n(new_dict, 1)
+    # final_candidate = get_top_n(new_dict, 1)
 
-    return final_candidate[0]
+    return final_ones[0]  # final_candidate[0]
 
 
 def spell_check_word(frequencies: dict, as_is_words: tuple, word: str) -> str:
     if word in frequencies:
         return word
-    candidates = propose_candidates(word)
-    true_candidates = keep_known(tuple(candidates), as_is_words, frequencies)
+    first_ones = propose_candidates(word)
+    true_candidates = keep_known(tuple(first_ones), frequencies)  # -as_is_words
     final_candidate = choose_best(frequencies, tuple(true_candidates))
     return final_candidate
 
