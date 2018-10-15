@@ -162,7 +162,7 @@ def spell_check_word(frequencies: dict, as_is_words: tuple, word: str) -> str:
     if word is None:
         return 'UNK'
     if as_is_words is None:
-        True
+        pass
     else:
         if word.upper() in as_is_words:
             return word
