@@ -99,7 +99,8 @@ def propose_candidates(word: str, max_depths_permutations: int = 1) -> list:
 
 def keep_known(candidates: tuple, frequencies: dict) -> list:
     # as_is_word = tuple
-    # if as_is_words is None: #return []
+    # if as_is_words is None:
+        # return []
     if candidates is None:
         return []
     if type(candidates) is not tuple:
@@ -110,8 +111,10 @@ def keep_known(candidates: tuple, frequencies: dict) -> list:
     # Step 1. Compliance check for candidates.
     list_of_true_candidates = []
     for potential_true_candidate in candidates:
-        if str(potential_true_candidate).isdigit():   # if potential_true_candidate.upper() in as_is_words:
-            continue                                 # list_of_true_candidates.append(potential_true_candidate)
+        if str(potential_true_candidate).isdigit():
+            continue
+        # if potential_true_candidate.upper() in as_is_words:
+            # list_of_true_candidates.append(potential_true_candidate)
         if potential_true_candidate in frequencies:
             list_of_true_candidates.append(potential_true_candidate)
 
@@ -156,6 +159,15 @@ def choose_best(frequencies: dict, candidates: tuple) -> str:
 
 
 def spell_check_word(frequencies: dict, as_is_words: tuple, word: str) -> str:
+    if word is None:
+        return 'UNK'
+    if as_is_words is None:
+        True
+    else:
+        if word.upper() in as_is_words:
+            return word
+    if frequencies is None:
+        return 'UNK'
     if word in frequencies:
         return word
     first_ones = propose_candidates(word)
