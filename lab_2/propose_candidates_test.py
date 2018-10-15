@@ -46,12 +46,8 @@ class ProposeCandidatesTest(unittest.TestCase):
     def test_propose_candidates_duplicates(self):
         test_word = 'cat'
         counter = 0
-        expected_counter = 1
         modifications = propose_candidates(test_word)
-        for word in modifications:
-            if word == 'cat':
-                counter += 1
-        self.assertEqual(expected_counter, counter)
+        self.assertEqual(len(modifications), len(set(modifications)))
 
     def test_propose_candidates_one_symbol(self):
         test_word = 'c'
