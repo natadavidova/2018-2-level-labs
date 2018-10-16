@@ -4,86 +4,86 @@ Labour work #1
 Count frequencies dictionary by the given arbitrary text
 """
 
-
-def read_from_file(path_to_file: str, lines_limit: int) -> str:
-
-    text = ""
-
-    with open(path_to_file, encoding='utf-8') as f_text:
-        for index, line in enumerate(f_text):
-            if index < lines_limit:
-                text += line
-            else:
-                break
-
-    return text
+def read_from_file(path_to_file, lines_limit: int) -> str:
+    my_text = ''
+    count_lines = 0
+    my_file = open(path_to_file, 'r')
+    for line in my_file.read():
+        if count_lines == lines_limit:
+            return my_text
+        my_text += line
+        count_lines += 1
+    my_file.close()
+    return my_text
 
 
 def calculate_frequences(text: str) -> dict:
-
-    freq_dict = {}
-
-    if not text:
-        return freq_dict
-
-    if isinstance(text, str):
-        words = text.lower().split(" ")
-        if '' in words or '\n' in words:
-            while '' in words:
-                words.remove('')
-            while '\n' in words:
-                words.remove('\n')
-        words_new = []
-
-        for word in words:
-            new_word = ""
-            if not word.isalpha():
-                for i in word:
-                    if i.isalpha():
-                        new_word += i
-                if new_word:
-                    words_new.append(new_word)
-            else:
-                words_new.append(word)
-
-        for word in words_new:
-            count_word = words_new.count(word)
-            freq_dict[word] = count_word
-
-    return freq_dict
+    first_dict = {}
+    list_of_marks = [
+                    '.', ',', ':', '"', '`', '[', ']',
+                    '?', '!', '@', '&', "'", '-',
+                    '$', '^', '*', '(', ')',
+                    '_', '“', '”', '’', '#', '%', '<', '>', '*', '~',
+                    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+                    ]
+    try:
+        elements = text.split()
+    except AttributeError:
+        return first_dict
+    for thing in elements:
+        if thing.isdigit():
+            continue
+        for mark in list_of_marks:
+            if mark in thing:
+                pos_mark = thing.find(mark)
+                thing = thing[:pos_mark] + thing[pos_mark + 1:]
+            thing = thing.strip(mark)
+        thing = thing.lower()
+        first_dict[thing] = first_dict.get(thing, 0) + 1
+    if '' in first_dict.keys():
+        first_dict.pop('')
+    return first_dict
 
 
-def filter_stop_words(freq_dict: dict, stop_words: tuple) -> dict:
+def filter_stop_words(first_dict: dict, stop_words: list) -> dict:
+    third_dict = {}
+    try:
+        second_dict = first_dict.copy()
+    except AttributeError:
+        return {}
+    if first_dict is None or stop_words is None:
+        return {}
+    for stop_word in stop_words:
+        if stop_word in second_dict.keys():
+            second_dict.pop(stop_word)
+    for key in second_dict.keys():
+        try:
+            if 0 <= key < 0:
+                continue
+        except TypeError:
+            third_dict[key] = first_dict[key]
+    return third_dict
 
-    if not freq_dict:
-        return freq_dict
 
-    freq_dict_new = freq_dict.copy()
-
-    for key in freq_dict.keys():
-        if not isinstance(key, str):
-            freq_dict_new.pop(key)
-    if stop_words:
-        for word_stop in stop_words:
-            if word_stop in freq_dict_new:
-                freq_dict_new.pop(word_stop)
-
-    return freq_dict_new
-
-
-def get_top_n(freq_dict: dict, top_n: int) -> tuple:
-
-    if not top_n > 0:
+def get_top_n(third_dict: dict, top_n: int) -> tuple:
+    list_of_value_key = []
+    list_of_top_words = []
+    count = 0
+    if top_n < 0:
         return ()
-
-    top_n_dict = sorted(freq_dict, key=freq_dict.__getitem__, reverse=True)
-    return tuple(top_n_dict[:top_n])
+    for key, value in third_dict.items():
+        list_of_value_key.append([value, key])
+    list_of_value_key.sort(reverse=True)
+    for item in list_of_value_key:
+        if count == top_n:
+            break
+        list_of_top_words.append(item[1])
+        count += 1
+    return tuple(list_of_top_words)
 
 
 def write_to_file(path_to_file: str, content: tuple):
-
-    with open(path_to_file, "w", encoding='utf-8') as f_text:
-
-        for word in content:
-            word += '\n'
-            f_text.write(word)
+    my_file = open(path_to_file, 'w')
+    for word in content:
+        my_file.write(word + '\n')
+    my_file.close()
