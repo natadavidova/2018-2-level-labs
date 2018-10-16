@@ -2,7 +2,7 @@
 Labour work #2
  Check spelling of words in the given  text
 """
-# from lab_1.main import get_top_n
+from lab_1.main import calculate_frequences
 
 LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -144,7 +144,8 @@ def choose_best(frequencies: dict, candidates: tuple) -> str:
         if new_dict[new_candidates[new_candidate]] > new_dict[new_candidates[new_candidate+1]]:
             new_dict_plus.pop(new_candidates[new_candidate+1])
         if new_dict[new_candidates[new_candidate]] < new_dict[new_candidates[new_candidate+1]]:
-            new_dict_plus.pop(new_candidates[new_candidate])
+            if new_candidates[new_candidate] in new_dict_plus:  # this is because of incorrect copy(checked in class)
+                new_dict_plus.pop(new_candidates[new_candidate])
         if new_dict[new_candidates[new_candidate]] == new_dict[new_candidates[new_candidate+1]]:
             continue
 
@@ -197,6 +198,16 @@ def spell_check_text(frequencies: dict, as_is_words: tuple, text: str) -> str:
         if element in frequencies:
             new_list_correct.append(element)
             continue
+        if element[0].isupper():  # checking if word given has capital letter and saving this letter.
+            new_element = element.lower()
+            if new_element in frequencies:
+                new_list_correct.append(element)
+                continue
+            correct_word = spell_check_word(frequencies, as_is_words, new_element)
+            for letter in correct_word:
+                new_element = letter.upper() + correct_word[1:]
+                new_list_correct.append(new_element)
+                break
         else:
             correct_word = spell_check_word(frequencies, as_is_words, element)
             new_list_correct.append(correct_word)
@@ -215,3 +226,13 @@ def spell_check_text(frequencies: dict, as_is_words: tuple, text: str) -> str:
         new_str_text_final += new_str_text[element_letter]
 
     return new_str_text_final
+
+
+# The first word will be 'has', not 'this',
+# because program deletes symbols (first one) and finds 'has' in dictionary,
+# and obviously 'has' is more frequent than 'this'.
+# Other mistakes have been found correctly.
+string = 'Thas is My Tezt, to Chekc Punctyation. Tahank yuo for watching? Bapital Leters included...'
+big_dict = calculate_frequences(REFERENCE_TEXT)
+str_final = spell_check_text(big_dict, (), string)
+# print(str_final)
