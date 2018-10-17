@@ -76,7 +76,7 @@ def keep_known(candidates: tuple, frequencies: dict) -> list:
 
 
 def choose_best(frequencies: dict, candidates: tuple) -> str:
-    max = 0
+    max_freq = 0
     max_word = ''
 
     if not candidates or not frequencies:
@@ -91,12 +91,12 @@ def choose_best(frequencies: dict, candidates: tuple) -> str:
     for word in candidates:
         if word in frequencies_new:
             # надо проверить по алфавиту
-            if int(frequencies_new[word]) == max:
+            if int(frequencies_new[word]) == max_freq:
                 if word < max_word:
-                    max = int(frequencies_new[word])
+                    max_freq = int(frequencies_new[word])
                     max_word = word
-            if int(frequencies_new[word]) > max:
-                max = int(frequencies_new[word])
+            if int(frequencies_new[word]) > max_freq:
+                max_freq = int(frequencies_new[word])
                 max_word = word
 
     return max_word
@@ -122,8 +122,8 @@ def spell_check_word(frequencies: dict, as_is_words: tuple, word: str) -> str:
             if not isinstance(as_is_word, str):
                 del(as_is_words_new[index])
 
-        for i in range(len(as_is_words_new)):
-            as_is_words_new[i] = as_is_words_new[i].lower()
+        for index, as_is in enumerate(as_is_words_new):
+            as_is_words_new[index] = as_is.lower()
 
         if word in as_is_words_new:
             return word
@@ -180,7 +180,7 @@ def spell_check_text(frequencies: dict, as_is_words: tuple, text: str) -> str:
             if not word.lower() in frequencies and word.isalpha():
                 need_check_words[word] = index
 
-        for bad_word in need_check_words.keys():
+        for bad_word in need_check_words:
             bad_word_l = bad_word.lower()
             good_word = spell_check_word(frequencies, as_is_words, bad_word_l)
             if not bad_word.islower():
