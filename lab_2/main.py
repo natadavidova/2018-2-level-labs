@@ -10,7 +10,7 @@ REFERENCE_TEXT = ''
 if __name__ == '__main__':
     with open('very_big_reference_text.txt', 'r') as f:
         REFERENCE_TEXT = f.read()
-        freq_dict = calculate_frequences(REFERENCE_TEXT)
+        FREQ_DICT = calculate_frequences(REFERENCE_TEXT)
 
 
 def propose_candidates(word: str, max_depth_permutations: int = 1) -> list:
@@ -90,7 +90,6 @@ def choose_best(frequencies: dict, candidates: tuple) -> str:
 
     for word in candidates:
         if word in frequencies_new:
-            # надо проверить по алфавиту
             if int(frequencies_new[word]) == max_freq:
                 if word < max_word:
                     max_freq = int(frequencies_new[word])
@@ -117,10 +116,6 @@ def spell_check_word(frequencies: dict, as_is_words: tuple, word: str) -> str:
             as_is_words_new = list(as_is_words_new)
         else:
             as_is_words_new = [as_is_words_new]
-
-        for index, as_is_word in enumerate(as_is_words):
-            if not isinstance(as_is_word, str):
-                del(as_is_words_new[index])
 
         for index, as_is in enumerate(as_is_words_new):
             as_is_words_new[index] = as_is.lower()
