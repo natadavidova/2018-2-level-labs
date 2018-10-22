@@ -25,60 +25,41 @@ def propose_candidates(word: str, max_depth_permutations: int = 1) -> list:
         return []
 
     candidates = []
-    candidates_perm_1 = []
+    words_cand = [word]
 
+    for i in range(max_depth_permutations):
+        candidates_perm_1 = []
 
-    for letter in range(97, 123):
-        for place in range(len(word) + 1):
-            new_word = word[:place] + str(chr(letter)) + word[place:]
-            if new_word not in candidates:
-                candidates.append(new_word)
-                candidates_perm_1.append(new_word)
-
-        for place in range(len(word)):
-            new_word = word[:place] + str(chr(letter)) + word[place + 1:]
-            if new_word not in candidates:
-                candidates.append(new_word)
-                candidates_perm_1.append(new_word)
-
-    for place in range(len(word)):
-        new_word = word[:place] + word[place + 1:]
-        if new_word not in candidates:
-            candidates.append(new_word)
-            candidates_perm_1.append(new_word)
-
-    for place in range(1, len(word)):
-        left = word[:place - 1] + word[place]
-        right = word[place - 1] + word[place + 1:]
-        new_word = left + right
-        if new_word not in candidates:
-            candidates.append(new_word)
-            candidates_perm_1.append(new_word)
-
-    if max_depth_permutations == 2:
-        for candidate in candidates_perm_1:
+        for word_cand in words_cand:
             for letter in range(97, 123):
-                for place in range(len(candidate) + 1):
-                    new_word = candidate[:place] + str(chr(letter)) + candidate[place:]
+                for place in range(len(word_cand) + 1):
+                    new_word = word_cand[:place] + str(chr(letter)) + word_cand[place:]
                     if new_word not in candidates:
                         candidates.append(new_word)
+                        candidates_perm_1.append(new_word)
 
-                for place in range(len(candidate)):
-                    new_word = candidate[:place] + str(chr(letter)) + candidate[place + 1:]
+
+                for place in range(len(word_cand)):
+                    new_word = word_cand[:place] + str(chr(letter)) + word_cand[place + 1:]
                     if new_word not in candidates:
                         candidates.append(new_word)
+                        candidates_perm_1.append(new_word)
 
-            for place in range(len(candidate)):
-                new_word = candidate[:place] + candidate[place + 1:]
+            for place in range(len(word_cand)):
+                new_word = word_cand[:place] + word_cand[place + 1:]
                 if new_word not in candidates:
                     candidates.append(new_word)
+                    candidates_perm_1.append(new_word)
 
-            for place in range(1, len(candidate)):
-                left = candidate[:place - 1] + candidate[place]
-                right = candidate[place - 1] + candidate[place + 1:]
+            for place in range(1, len(word_cand)):
+                left = word_cand[:place - 1] + word_cand[place]
+                right = word_cand[place - 1] + word_cand[place + 1:]
                 new_word = left + right
                 if new_word not in candidates:
                     candidates.append(new_word)
+                    candidates_perm_1.append(new_word)
+
+            words_cand = candidates_perm_1[::]
 
     return candidates
 
