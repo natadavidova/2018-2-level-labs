@@ -110,7 +110,8 @@ def spell_check_word(frequencies: dict, as_is_words: tuple, word: str) -> str:
         return best
 
 if __name__ == '__main__':
-        if REFERENCE_TEXT == '':
+    if REFERENCE_TEXT == '':
         with open('very_big_reference_text.txt', 'r') as f:
             REFERENCE_TEXT = f.read()
     freq = calculate_frequences(REFERENCE_TEXT)
+
