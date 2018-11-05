@@ -15,12 +15,11 @@
   |-- lab_3
     |-- not_so_big_reference_text.txt
 ```
-2. Произвольный английский текст в виде мнострочной строки.
-Произвольность означает наличие любых симоволов, в том числе знаки
-препинания и числа. Строка может быть пустой.
 
-Пример произвольного английского текста: 'Mary was quick to realize that
-she had won the prize that was a desired thing that everyone wanted'
+> Дальнейшая работа происходит исключительно с заданным текстом, в отличие от предыдущих 
+> лабораторных работ, где большой текст использовался в качестве источника данных, а анализ
+> производился на заданном произвольном тексте. Для выполнения данной работы
+> требуется использовать только заданный текст, доступный по ссылке. 
 
 ## Что надо сделать
 
@@ -69,7 +68,7 @@ if __name__ == '__main__':
 Внешний интерфейс выглядит так:
 
 ```python
-def split_by_sentence(text: string) -> list:
+def split_by_sentence(text: str) -> list:
   pass
 ```
 
@@ -97,7 +96,7 @@ class WordStorage:
 ```python
 class WordStorage:
   ...
-  def put(self, word:string) -> number:
+  def put(self, word:str) -> int:
     pass
 ```
 
@@ -110,20 +109,20 @@ class WordStorage:
 ```python
 class WordStorage:
   ...
-  def get_id_of(self, word:string) -> number:
+  def get_id_of(self, word:str) -> int:
     pass
 ```
 
 ### Шаг 2.3 Реализация метода получения оригинального слова по заданному идентификатору
 
 Для любого `id` можно попытаться получить соответствующее ему слово. Для этого, реализуйте 
-метод `get_original_by(id:number)`, который принимает на вход идентификатор и возвращает слово. 
+метод `get_original_by(id:int)`, который принимает на вход идентификатор и возвращает слово. 
 Если идентификатор неизвестный, возвращается `None`.
 
 ```python
 class WordStorage:
   ...
-  def get_original_by(self, corpus:tuple) -> string:
+  def get_original_by(self, id:int) -> str:
     pass
 ```
 
@@ -136,7 +135,7 @@ class WordStorage:
 ```python
 class WordStorage:
   ...
-  def from_corpus(self, id:tuple) -> string:
+  def from_corpus(self, id:tuple) -> str:
     pass
 ```
 
@@ -230,7 +229,7 @@ self.gram_frequencies[(1,2)] = 10
 ```python
 class NGramTrie:
   ...
-  def fill_from_sentence(self, sentence: tuple) -> string:
+  def fill_from_sentence(self, sentence: tuple) -> str:
     pass
 ```
 
@@ -315,7 +314,7 @@ class NGramTrie:
 Интерфейс такой:
 
 ```python
-def generate_text(n_gram_model: NGramTrie, number_sentences: number, prefix: tuple) -> list:
+def generate_text(n_gram_model: NGramTrie, number_sentences: int, prefix: tuple) -> list:
   pass
 ```
 
