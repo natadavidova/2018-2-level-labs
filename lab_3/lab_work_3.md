@@ -54,10 +54,10 @@ if __name__ == '__main__':
 ```json
 [
   [
-    'mary', 'wanted', 'to', 'swim'
+    "mary", "wanted", "to", "swim"
   ],
   [
-    'however', 'she', 'was', 'afraid', 'of', 'sharks'
+    "however", "she", "was", "afraid", "of", "sharks"
   ]
 ]
 ```
