@@ -9,7 +9,7 @@ REFERENCE_TEXT = ''
 if __name__ == '__main__':
     with open('not_so_big_reference_text.txt', 'r') as f:
         REFERENCE_TEXT = f.readlines()
-        text = " ".join(REFERENCE_TEXT)
+        TEXT = " ".join(REFERENCE_TEXT)
 
 
 class WordStorage:
@@ -30,15 +30,14 @@ class WordStorage:
 
         return -1
 
-    def get_original_by(self, id: int) -> str:
+    def get_original_by(self, id_word: int) -> str:
 
         id_index = -1
-        if id in self.storage.values():
-            id_index = list(self.storage.values()).index(id)
+        if id_word in self.storage.values():
+            id_index = list(self.storage.values()).index(id_word)
         if id_index != -1:
             return list(self.storage.keys())[id_index]
-        else:
-            return "UNK"
+        return "UNK"
 
     def from_corpus(self, corpus: tuple):
 
@@ -81,7 +80,7 @@ class NGramTrie():
 
     def calculate_log_probabilities(self):
 
-        for n_gram in self.gram_frequencies.keys():
+        for n_gram in self.gram_frequencies:
             n_gram_part_count = 0
             n_gram_part = n_gram[:-1]
             for index, key in enumerate(list(self.gram_frequencies.keys())):
@@ -116,7 +115,7 @@ class NGramTrie():
             if tuple(prefix_list[-self.size + 1:]) in n_gram_part:
                 prefix_index = n_gram_part.index(prefix_word)
                 n_gram_whole = tuple(list(prefix_word) + [n_gram_answer[prefix_index]])
-                for index, key in enumerate(log_prob_l):
+                for key in log_prob_l:
                     if key == n_gram_whole:
                         prefix_list += [n_gram_answer[prefix_index]]
                         prefix_word = prefix_list[-self.size + 1:]
@@ -131,12 +130,11 @@ class NGramTrie():
 def encode(storage_instance, corpus) -> list:
     code_sentences = []
 
-    for index, sentence in enumerate(corpus):
+    for sentence in corpus:
         code_sentence = []
         for word in sentence:
             code_word = storage_instance.get(word)
             code_sentence += [code_word]
-        # code_sentence += [1]
         code_sentences += [code_sentence]
 
     return code_sentences
