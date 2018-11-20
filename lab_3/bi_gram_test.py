@@ -52,7 +52,7 @@ class BiGramTest(unittest.TestCase):
 
     def test_calculate_log_probabilities_ideal(self):
         ngram = NGramTrie(2)
-        ngram.gram_frequencies = {(1, 2): 10, (1, 3): 2}
+        ngram.gram_frequencies = {(1, 2): 10, (1, 3): 2, (2, 5): 5}
         first_prob = math.log(10 / 12)
         second_prob = math.log(2 / 12)
         ngram.calculate_log_probabilities()

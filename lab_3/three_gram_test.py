@@ -31,7 +31,7 @@ class ThreeGramTest(unittest.TestCase):
 
     def test_three_gram_calculate_log_probabilities_ideal(self):
         ngram = NGramTrie(3)
-        ngram.gram_frequencies = {(1, 2, 3): 10, (1, 2, 4): 2}
+        ngram.gram_frequencies = {(1, 2, 3): 10, (1, 2, 4): 2, (2, 1, 3): 2}
         first_prob = math.log(10 / 12)
         second_prob = math.log(2 / 12)
         ngram.calculate_log_probabilities()
