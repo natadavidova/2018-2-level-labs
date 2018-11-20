@@ -1,3 +1,8 @@
+"""
+Labour work #3
+ ThreeGram tests
+"""
+
 import unittest
 
 import math

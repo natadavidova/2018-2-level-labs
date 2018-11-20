@@ -1,3 +1,8 @@
+"""
+Labour work #3
+ BiGram tests
+"""
+
 import unittest
 
 import math
@@ -39,7 +44,8 @@ class BiGramTest(unittest.TestCase):
     def test_fill_from_sentence_none(self):
         ngram = NGramTrie(2)
         sentence = None
-        ngram.fill_from_sentence(sentence)
+        res = ngram.fill_from_sentence(sentence)
+        print(res)
         expected_res = {}
         self.assertEqual(ngram.gram_frequencies, expected_res)
 
