@@ -68,8 +68,8 @@ class NGramTrie():
                     count_n_gram = 0
                     n_gram = tuple(sentence_list[i:i + self.size])
                     if n_gram not in self.gram_frequencies.keys():
-                        for i in range(len(self.sentence_code_list) - self.size + 1):
-                            if self.sentence_code_list[i:i + self.size] == list(n_gram):
+                        for k in range(len(self.sentence_code_list) - self.size + 1):
+                            if self.sentence_code_list[k:k + self.size] == list(n_gram):
                                 count_n_gram += 1
                         self.gram_frequencies[n_gram] = count_n_gram
                 answer = "OK"
