@@ -73,7 +73,7 @@ class NGramTrie():
                                 count_n_gram += 1
                         self.gram_frequencies[n_gram] = count_n_gram
                 answer = "OK"
-            except Exception:
+            except AssertionError:
                 answer = "ERROR"
 
             return answer
