@@ -133,7 +133,7 @@ def encode(storage_instance, corpus) -> list:
     for sentence in corpus:
         code_sentence = []
         for word in sentence:
-            code_word = storage_instance.get(word)
+            code_word = storage_instance.get_id_of(word)
             code_sentence += [code_word]
         code_sentences += [code_sentence]
 
