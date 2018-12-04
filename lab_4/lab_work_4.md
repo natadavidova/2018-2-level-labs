@@ -219,13 +219,18 @@ class TfIdfCalculator:
 ```python
 class TfIdfCalculator:
   ...
-  def report_on_word(self, word):
+  def report_on_word(self, word, document_index):
     pass
 ```
 
-Данный метод возвращает значение кортеж, где первый элемент - это IDF для 
-заданного слова, если оно встречалось в тексте и `None` иначе, а второе - место, 
-которое данное слово занимает в рейтинге значимости слов.
+Данный метод возвращает значение кортеж, где первый элемент - это **TF-IDF** для 
+заданного слова, если оно встречалось в тексте и `None` иначе, второе - место, 
+которое данное слово занимает в рейтинге значимости слов в заданном тексте.
+
+Например, получаем кортеж (1.3, 100).
+Это означает, что слово имеет значение **TF-IDF** равное 1.3, является сотым
+по значимости в тексте. Важно при определении места учитывать тот факт, что на
+одном месте в рейтинге могут быть сразу несколько слов. 
 
 В таком рейтинге, первое место у самого значимого слова, то есть у того, чьё значение
 **TF-IDF** максимально.
@@ -307,7 +312,7 @@ class TfIdfCalculator:
     значение **TF-IDF**, если `word[i]` есть в тексте либо 0.
     Получаем, для первого слова: `[0.1, 0.2, 0.3, 0.4, 0.5, 0]`, а для второго:
     `[0.12, 0, 0, 0, 0.13]`. Числа, конечно, вымышленные.
-3. Найдем косинусное векторами: <img src="https://latex.codecogs.com/gif.latex?cos(A,B)&space;=&space;\frac{A&space;\cdot&space;B}{||A||||B||}&space;=&space;\frac{\sum_{i=1}^{n}A_i&space;\times&space;B_i}{\sqrt{\sum_{i=1}^{n}{(A_i)^{2}}}&space;\times&space;\sqrt{\sum_{i=1}^{n}{(B_i)^2}}}" title="cos(A,B) = \frac{A \cdot B}{||A||||B||} = \frac{\sum_{i=1}^{n}A_i \times B_i}{\sqrt{\sum_{i=1}^{n}{(A_i)^{2}}} \times \sqrt{\sum_{i=1}^{n}{(B_i)^2}}}" />
+3. Найдем косинусное расстояние между векторами: <img src="https://latex.codecogs.com/gif.latex?cos(A,B)&space;=&space;\frac{A&space;\cdot&space;B}{||A||||B||}&space;=&space;\frac{\sum_{i=1}^{n}A_i&space;\times&space;B_i}{\sqrt{\sum_{i=1}^{n}{(A_i)^{2}}}&space;\times&space;\sqrt{\sum_{i=1}^{n}{(B_i)^2}}}" title="cos(A,B) = \frac{A \cdot B}{||A||||B||} = \frac{\sum_{i=1}^{n}A_i \times B_i}{\sqrt{\sum_{i=1}^{n}{(A_i)^{2}}} \times \sqrt{\sum_{i=1}^{n}{(B_i)^2}}}" />
 
 Для этого, требуется реализовать метод 
 `cosine_distance(self, index_text_1, index_text_2)`:
